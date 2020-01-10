@@ -1,0 +1,97 @@
+body{font-family: 'Roboto', sans-serif;}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: 'Montserrat', sans-serif;}
+.theme-bg{background-color: #f1a626; color: #ffffff;}
+.font-17 {font-size: 17px}
+.font-14 {font-size: 14px}
+.font-medium{font-weight: 500}
+.hidden-link{position: absolute;top: 0;left: 0;width: 100%;height: 100%;opacity: 0}
+a{-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;text-decoration:none}
+a:visited,a:hover,a:active,a:focus{text-decoration:none}
+.alignleft {float: left; margin: 0.5em 1em 0.5em 0; }
+.alignright {float: right; margin: 0.5em 0 0.5em 1em; }
+.aligncenter {display: block; margin-left: auto; margin-right: auto; }
+.screen-reader-text{display:none}
+.se-pre-con{position:fixed;left:0px;top:0px;width:100%;height:100%;z-index:99999} 
+.se-pre-con > *{position:fixed;top:50%;left:0;right:0;margin:0 auto;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%)}
+.scrollup{opacity:0.3;position:fixed;bottom:50px;right:50px;display:none;z-index:99999}
+.breadcrumb{background-color:transparent;margin-bottom:0;padding:0}
+.breadcrumb li+li:before{display:inline-block;content:'/';margin:0 5px}
+.pagination{-webkit-box-pack:center!important;-ms-flex-pack:center!important;justify-content:center!important;margin-bottom:20px}
+.pagination .page-numbers{color:#000000;display:inline-block;text-align:center;padding:5px;min-width:42px;line-height:30px;border:1px solid #000000;text-decoration:none}
+.pagination .page-numbers.dots{border-color:transparent}
+header{box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;}
+header.tiny{position: fixed;width: 100%;top: 0;z-index: 9999;}
+.navbar {padding:0;}
+.navbar .navbar-nav .menu-item{position:relative}
+.navbar .navbar-nav .menu-item a{display:inline-block;padding:.5rem;color:#000000}
+.navbar .navbar-nav .menu-item.menu-item-has-children .drop_down_icon{float:right;cursor:pointer;line-height: 40px;}
+.sub-menu{top:100%;left:0;z-index:1000;display:none;float:left;min-width:10rem;padding:0;margin:.125rem 0 0;font-size:1rem;color:#212529;text-align:left;list-style:none;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.15);border-radius:.25rem} 
+section,footer,#footer{position:relative}
+#contact-bar a{color: #ffffff}
+#contact-bar .content-wrap{padding: 5px 0;}
+#section-banner .wrapper img{width:100%;height:auto}
+#page-title {background-position:center center; background-repeat:no-repeat; background-size:cover;overflow:hidden;text-align:center}
+#page-title .content-wrap{position: relative;}
+#page-title .shortcode-output,#page-title .video-output {position:absolute;left:0;top:0;width:100%;height:100%}
+#page-title .video-output video {width:100%}
+#page-title .heading {font-size: 40px; font-weight: 700}
+
+#banner-section{background-image: url(../svgs/bg-wave-img.svg);background-position: center bottom;}
+#banner-section h2{font-size: 45px;font-weight: 800}
+
+.page-content .card img{max-width:100%;height:auto}
+#blogs .card{margin-bottom:30px}
+.widget ul{list-style:none;padding-left:0}
+.widget ul li{}
+.widget ul li a{}
+.widget ul li ul{}
+#wp-calendar{width:100%}
+#wp-calendar thead tr th{border:1px solid #000000;text-align:center}
+#wp-calendar tbody tr td{background-color:rgba(0,0,0,.5);color:#ffffff;text-align:center}
+.widget input[type="text"],
+/* .widget input[type="search"],
+.widget input[type="radio"],
+/*.widget input[type="checkbox"],*/
+.widget input[type="tel"],.widget input[type="time"],.widget input[type="url"],.widget input[type="week"],.widget input[type="password"],.widget input[type="color"],.widget input[type="date"],.widget input[type="datetime"],.widget input[type="datetime-local"],.widget input[type="email"],.widget input[type="month"],.widget input[type="number"],.widget select,.widget textarea {display:block;width:100%;height:calc(1.5em + .75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+.input-group-btn{margin-left:-3px}
+.btn-search{border:1px solid #ced4da;border-left-style:none} 
+.mos-counter-unit{box-shadow: 0 0 71.44px 4.56px rgba(0,0,0,.12);}
+#section-widgets{background-image: url(../svgs/footer.svg);background-position: center top;background-repeat: no-repeat;}
+#footer {background-color: #f1a626}
+/*VC CSS*/
+.wpb_button, .wpb_content_element, ul.wpb_thumbnails-fluid>li,.vc_btn3-container {margin-bottom: 20px!important;}
+.wpb-js-composer .vc_tta-tabs:not([class*=vc_tta-gap]):not(.vc_tta-o-no-fill).vc_tta-tabs-position-top .vc_tta-tab>a{border-radius: 0!important}
+/*Small devices (landscape phones,576px and up)*/
+@media (min-width:576px){}
+
+/* Medium devices (tablets,768px and up) */
+@media (min-width:768px){
+    .sub-menu{position:absolute}
+    .navbar-nav.ml-auto .sub-menu{left:auto;right:0}
+    .navbar-nav .menu-item-has-children:hover > .sub-menu{display:block} 
+}
+
+/* Large devices (desktops,992px and up) */
+@media (min-width:992px){}
+
+/* Extra large devices (large desktops,1200px and up) */
+@media (min-width:1200px){}
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Large devices (desktops,less than 1200px) */
+@media (max-width:1199.98px){}
+
+/* Medium devices (tablets,less than 992px) */
+@media (max-width:991.98px){
+	.aligncenter,.alignleft,.alignright {display: block; margin-left: auto; margin-right: auto;float: none;}
+}
+
+/* Small devices (landscape phones,less than 768px) */
+@media (max-width:767.98px){
+    .sub-menu{position:relative;width:100%}
+    .navbar .navbar-nav .menu-item a{display:block}    
+    .navbar .navbar-nav .menu-item.menu-item-has-children .drop_down_icon{border:1px solid #000;width:24px;text-align:center;padding:0}
+}
+
+/* Extra small devices (portrait phones,less than 576px) */
+@media (max-width:575.98px){}
