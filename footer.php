@@ -7,11 +7,6 @@ $page_details = array( 'id' => get_the_ID(), 'template_file' => basename( get_pa
     <div class="content-wrap">
       <div class="container">
         <?php echo do_shortcode( $forclient_options['sections-footer-content'] ); ?>
-        <div class="row align-items-center">
-          <div class="col-md-2 text-center text-md-left"><?php echo do_shortcode('[site-identity]'); ?></div>
-          <div class="col-md-8 text-center"><?php echo do_shortcode('[copyright-symbol]')?> 2016 - <?php echo do_shortcode('[this-year]')?> <?php echo do_shortcode('[site-name]')?>. All right reserved. Developed by <a class="theme-credit" href="https://www.mdmostakshahid.me" target="_blank">Md. Mostak Shahid</a></div>
-          <!-- <div class="col-md-2 text-center text-md-right">Social Links</div> -->
-        </div>
       </div>
     </div>
   </footer>

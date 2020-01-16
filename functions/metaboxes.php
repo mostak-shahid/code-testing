@@ -1,7 +1,16 @@
 <?php
 function forclient_metaboxes() {
     $prefix = '_forclient_';
-    global $forclient,$template_parts;
+    global $forclient_options,$template_parts;
+    $blog_id = get_option( 'page_for_posts' );
+    if ($_GET['post'] == $blog_id){
+        $enabled = ($forclient_options['archive-page-sections']['Enabled']) ? $forclient_options['archive-page-sections']['Enabled'] : $template_parts['Enabled'];
+        $disabled = ($forclient_options['archive-page-sections']['Disabled']) ? $forclient_options['archive-page-sections']['Disabled'] : $template_parts['Disabled'];
+    }
+    else{
+        $enabled = ($forclient_options['general-page-sections']['Enabled']) ? $forclient_options['general-page-sections']['Enabled'] : $template_parts['Enabled'];
+        $disabled = ($forclient_options['general-page-sections']['Disabled']) ? $forclient_options['general-page-sections']['Disabled'] : $template_parts['Disabled'];
+    }
 
     $page_settings = new_cmb2_box(array(
         'id' => $prefix . 'page_settings',
@@ -14,16 +23,23 @@ function forclient_metaboxes() {
         'type'    => 'tb_sorter',
         'desc'      => '<a href="'.admin_url( 'admin-ajax.php' ).'?action=reset_prl&post_id='.$_GET['post'].'">Click here</a> to reset "Page Row Layout"',
         'options' => array(
-            'Enabled'  => $template_parts['Enabled'],
-            'Disabled' => $template_parts['Disabled'], 
+            'Enabled'  => $enabled,
+            'Disabled' => $disabled, 
         ),
-    ));    
+    ));     
     $banner_details = new_cmb2_box(array(
         'id' => $prefix . 'banner_details',
         'title' => __('Banner Details', 'cmb2'),
         'object_types' => array('page'),
         //'show_on'      => array( 'key' => 'page-template', 'value' => 'page-template/lightbox-gallery-page.php' ),
     )); 
+    $banner_details->add_field( array(
+        'name' => 'Enable Banner',
+        'desc' => 'Yes',
+        'id'   => $prefix . 'banner_enable',
+        'type' => 'checkbox',
+        'default' => true
+    ));
     $banner_details->add_field( array(
         'name'    => 'Banner Cover',
         'desc'    => 'Upload an image or enter an URL.',
@@ -62,7 +78,14 @@ function forclient_metaboxes() {
         'name' => __( 'Short Code', 'cmb2' ),
         'id'   => $prefix . 'banner_shortcode',
         'type' => 'text',
-    ));  
+    )); 
+    $banner_details->add_field( array(
+        'name' => 'Enable Breadcrumb',
+        'desc' => 'Yes',
+        'id'   => $prefix . 'breadcrumb_enable',
+        'type' => 'checkbox',
+        'default' => true
+    )); 
 
 	$post_gallery_details = new_cmb2_box(array(
         'id' => $prefix . 'post_gallery_details',
@@ -235,6 +258,24 @@ function forclient_metaboxes() {
         //     'type' => 'application/pdf', // Make library only display PDFs.
         // ),
         'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ));
+    $project_settings = new_cmb2_box(array(
+        'id' => $prefix . 'project_settings',
+        'title' => __('Project Settings', 'cmb2'),
+        'object_types' => array('project'),
+    )); 
+    $project_settings->add_field(array(
+        'name' => 'Project URL',
+        'id'   => $prefix . 'project_url',
+        'type' => 'text_url',
+    ));   
+    $project_settings->add_field(array(
+        'name' => 'Project Images',
+        'desc' => '',
+        'id'   => $prefix.'project_gallery_images',
+        'type' => 'file_list',
+        // 'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
+        'query_args' => array( 'type' => 'image' ), // Only images attachment
     ));
 }
 add_action('cmb2_admin_init', 'forclient_metaboxes');

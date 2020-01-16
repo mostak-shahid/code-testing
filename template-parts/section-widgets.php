@@ -15,7 +15,7 @@ do_action( 'action_avobe_widgets', $page_details );
 		
 		<?php do_action( 'action_before_widgets', $page_details ); ?>
 		<?php if ($title) : ?>				
-			<div class="title-wrapper">
+			<div class="title-wrapper wow fadeInDown">
 				<h2 class="title"><?php echo do_shortcode( $title ); ?></h2>				
 			</div>
 		<?php endif; ?>

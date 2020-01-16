@@ -79,7 +79,7 @@ function forclient_plugins_management() {
 			'source'       => 'https://s3.amazonaws.com/tgm/tgm-new-media-plugin.zip', // The plugin source.
 			'required'     => true, // If false, the plugin is only 'recommended' instead of required.
 			'external_url' => 'https://github.com/thomasgriffin/New-Media-Image-Uploader', // If set, overrides default API URL and points to an external URL.
-		),*/
+		),
 		/*array(
 			'name'				=> 'Formidable Forms', 
 			'slug'				=> 'formidable', 
@@ -87,13 +87,14 @@ function forclient_plugins_management() {
 			'required'			=> true,
 			'force_activation'	=> false, 
 		),
+		*/
 		array(
 			'name'				=> 'Mos Image Alter tag management', 
 			'slug'				=> 'mos-image-alt', 
 			'source'			=> 'https://github.com/mostak-shahid/mos-image-alt/archive/master.zip', 
 			'required'			=> true,
 			'force_activation'	=> false, 
-		),*/
+		),
 		array(
 			'name'				=> 'Yoast SEO', 
 			'slug'				=> 'wordpress-seo', 
@@ -133,6 +134,18 @@ function forclient_plugins_management() {
 		array(
 			'name'				=> 'FakerPress', 
 			'slug'				=> 'fakerpress',  
+			'required'			=> false,
+			'force_activation'	=> false, 
+		),
+		array(
+			'name'				=> 'Contact Form 7', 
+			'slug'				=> 'contact-form-7',  
+			'required'			=> false,
+			'force_activation'	=> false, 
+		),
+		array(
+			'name'				=> 'Redirection for Contact Form 7', 
+			'slug'				=> 'wpcf7-redirect',  
 			'required'			=> false,
 			'force_activation'	=> false, 
 		),

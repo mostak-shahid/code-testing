@@ -6,10 +6,6 @@ function add_slug_body_class( $classes ) {
     } else {
         $classes[] = $post->post_type . '-archive';
     }
-    $current_user = wp_get_current_user();
-    if ( 0 == $current_user->ID ) {
-       $classes[] = 'guest-user'; 
-    }
     return $classes;
 }
 add_filter( 'body_class', 'add_slug_body_class' );
@@ -36,4 +32,8 @@ function custom_admin_script(){
     }
         
 }
-add_action('admin_head', 'custom_admin_script');
+// add_action('admin_head', 'custom_admin_script');
+add_filter('wpcf7_form_elements', function($content) {
+    $content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
+    return $content;
+});

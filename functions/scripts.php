@@ -3,8 +3,10 @@
 function forclient_enqueue_scripts() {
 	global $forclient_options;
 	wp_enqueue_script( 'jquery' );	
-	wp_register_style( 'google-font', 'https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900|Roboto:100,300,400,500,700,900&display=swap' );
-	wp_enqueue_style( 'google-font' );
+	// wp_register_style( 'google-font', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Oxygen:300,400,700' );
+	// wp_enqueue_style( 'google-font' );
+	wp_register_style( 'fonts', get_template_directory_uri() . '/fonts/fonts.css' );
+	wp_enqueue_style( 'fonts' );
 	wp_register_style( 'font-awesome.min', get_template_directory_uri() . '/fonts/font-awesome-4.7.0/css/font-awesome.min.css' );
 	wp_enqueue_style( 'font-awesome.min' );
 
@@ -34,7 +36,12 @@ function forclient_enqueue_scripts() {
 	wp_enqueue_script( 'jquery.lazy.min' );
 
 	wp_register_script('jPages.min', get_template_directory_uri() . '/plugins/jPages/jPages.min.js', 'jquery');
-	wp_enqueue_script( 'jPages.min' );
+	wp_enqueue_script( 'jPages.min' );	
+
+	wp_register_script('waypoints.min', get_template_directory_uri() . '/plugins/jquery.counterup/waypoints.min.js', 'jquery');
+	wp_enqueue_script( 'waypoints.min' );
+	wp_register_script('jquery.counterup.min', get_template_directory_uri() . '/plugins/jquery.counterup/jquery.counterup.min.js', 'jquery');
+	wp_enqueue_script( 'jquery.counterup.min' );
 	
 
 
@@ -72,13 +79,3 @@ function forclient_admin_enqueue_scripts(){
 }
 add_action( 'admin_enqueue_scripts', 'forclient_admin_enqueue_scripts' );
 
-function mos_theme_ajax_scripts(){
-    wp_enqueue_script( 'ajax', get_template_directory_uri() . '/js/ajax.js', array('jquery') );
-    $ajax_params = array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        // 'ajax_nonce' => wp_create_nonce('mos_theme_verify'),
-    );
-    wp_localize_script( 'ajax', 'ajax_obj', $ajax_params );
-}
-add_action( 'wp_enqueue_scripts', 'mos_theme_ajax_scripts' );
-add_action( 'admin_enqueue_scripts', 'mos_theme_ajax_scripts' );

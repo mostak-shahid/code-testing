@@ -1,4 +1,9 @@
 /*Background Color*/
-/*Text Color*/
+
+.bg-theme,.sub-menu,#footer,#section-project .project-unit .overlay .recent-work-inner a,.pagination .page-numbers.current,.pagination .page-numbers:hover,#section-widgets .widgets-one .address-wrap:before,#section-widgets .widgets-one .phone-number-wrap:before, #section-widgets .widgets-one .email-wrap:before,.blogs .blog-unit .meta-part > div:before,#section-service .title-wrapper:before,#section-welcome:before,#section-help .title-wrapper:before,#section-about:before{background-color:rgba(30,158,188,1)} 
+.svg-theme-bg{fill:rgba(30,158,188,1);}
+/*Text Color*/   
+.text-theme,.navbar .navbar-nav .menu-item.current-menu-item>a,.navbar .navbar-nav .menu-item.current_page_item>a,.navbar .navbar-nav .menu-item.current-menu-ancestor>a,.navbar .navbar-nav .menu-item.current-menu-parent>a,.navbar .navbar-nav .menu-item.current_page_parent>a,.navbar .navbar-nav .menu-item.current_page_ancestor>a,.navbar .navbar-nav .menu-item:hover>a,.navbar .navbar-nav .menu-item.current-menu-item>.drop_down_icon,.navbar .navbar-nav .menu-item.current_page_item>.drop_down_icon,.navbar .navbar-nav .menu-item.current-menu-ancestor>.drop_down_icon,.navbar .navbar-nav .menu-item.current-menu-parent>.drop_down_icon,.navbar .navbar-nav .menu-item.current_page_parent>.drop_down_icon,.navbar .navbar-nav .menu-item.current_page_ancestor>.drop_down_icon,.navbar .navbar-nav .menu-item:hover>.drop_down_icon,.navbar .navbar-nav .menu-item .sub-menu .menu-item:hover a,#section-widgets .widget-title,#section-about .slides .slide-unit .counter-part,.blogs .blog-unit:hover .title-part{color:rgba(30,158,188,1)} 
 /*Border Color*/
+.border-theme,#section-widgets .widget-title,#section-service .service-unit:hover,#section-about .slides .slide-unit,.pagination .page-numbers.current,.pagination .page-numbers:hover{border-color:rgba(30,158,188,1)}
 /*Shadow Color*/

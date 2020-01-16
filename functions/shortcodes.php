@@ -24,11 +24,93 @@ function shortcodes_page(){
 			<li>[email offset=0 index=0 all=1 seperator=', '] <span class="sdetagils">displays email from theme option</span></li>
 			<li>[phone offset=0 index=0 all=1 seperator=', '] <span class="sdetagils">displays phone from theme option</span></li>
 			<li>[fax offset=0 index=0 all=1 seperator=', '] <span class="sdetagils">displays fax from theme option</span></li>
-			<li>[social_menu display='inline/block' title='0/1'] <span class="sdetagils">displays social media from theme option</span></li>		
+			<li>[social_menu display='inline/block' title='0/1'] <span class="sdetagils">displays social media from theme option</span></li>	
+			<li>[feature-image wrapper_element='div' wrapper_atts='' height='' width=''] <span class="sdetagils">displays feature image</span></li>		
+			<li>[projects limit=-1 pagination=0] <span class="sdetagils">displays feature image</span></li>		
 		</ol>
 	</div>
 	<?php
 }
+/**
+ * Returns the parsed shortcode.
+ *
+ * @param array   {
+ *     Attributes of the shortcode.
+ *
+ *     @type string $id ID of...
+ * }
+ * @param string  Shortcode content.
+ *
+ * @return string HTML content to display the shortcode.
+ */
+function projects_func( $atts = array(), $content = '' ) {
+	$html = '';
+	$atts = shortcode_atts( array(
+		'limit' => -1,
+		'pagination' => 0,
+	), $atts, 'projects' );
+	$args = array( 
+		'post_type' => 'project',
+		'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
+	);
+	$args['posts_per_page'] = $atts['limit'];
+	$query = new WP_Query( $args );
+	$total_post = $query->post_count;
+	if ( $query->have_posts() ) :
+		$html .= '<div class="row projects">';
+		$delay = 500;
+		while ( $query->have_posts() ) : $query->the_post();
+			if (has_post_thumbnail( get_the_ID() )) :
+				$link = get_post_meta( get_the_ID(), '_forclient_project_url', true );
+				$gallery_images = get_post_meta( get_the_ID(), '_forclient_project_gallery_images', true );
+				$html .= '<div class="col-lg-4 col-md-6 mb-4">';
+					$html .= '<div class="project-unit text-center position-relative wow fadeInUp" data-wow-delay="<?php echo $delay?>ms">';
+						$html .= '<img class="img-fluid img-project" src="'.aq_resize(get_the_post_thumbnail_url( get_the_ID() ), 350, 215, true).'" alt="'.get_the_title( get_the_ID() ).'">';
+						$html .= '<div class="overlay smooth">';
+							$html .= '<div class="recent-work-inner d-flex  justify-content-center align-items-center h-100">';
+								$html .= '<a class="gallery-preview" data-fancybox="gallery-'.get_the_ID().'" data-caption="'.get_the_title( get_the_ID() ).'" href="'.get_the_post_thumbnail_url( get_the_ID() ).'"><i class="fa fa-plus"></i></a>';
+								if ($link):
+									$html .= '<a class="link-preview" href="'.esc_url(do_shortcode( $link )).'" target="_blank"><i class="fa fa-chain"></i></a>';
+								endif;
+							$html .= '</div>';
+							$html .= '<h4 class="title-project">'.get_the_title( get_the_ID() ).'</h4>';
+						$html .= '</div>';
+					$html .= '</div>';
+
+					$html .= '<div class="d-none">';
+						if(@$gallery_images) :
+							foreach($gallery_images as $attachment_id => $url) :
+								$html .= '<a data-fancybox="gallery-'.get_the_ID().'" data-caption="'.get_the_title( get_the_ID() ).'" href="'.wp_get_attachment_url( $attachment_id ).'"></a>';
+							endforeach;
+						endif;
+					$html .= '</div>';
+				$html .= '</div>';
+				$delay = $delay + 200;
+			endif;
+		endwhile;
+		$html .= '</div><!--/.row.projects-->';
+		wp_reset_postdata();
+		if ($atts['pagination']) :
+		    $html .= '<div class="pagination-wrapper project-pagination">'; 
+		        $html .= '<nav class="navigation pagination" role="navigation">';
+		            $html .= '<div class="nav-links">'; 
+		            $big = 999999999; // need an unlikely integer
+		            $html .= paginate_links( array(
+		                'base' => str_replace( $big, '%#%', get_pagenum_link( $big ) ),
+		                'format' => '?paged=%#%',
+		                'current' => max( 1, get_query_var('paged') ),
+		                'total' => $query->max_num_pages,
+		                'prev_text'          => __('Prev'),
+		                'next_text'          => __('Next')
+		            ) );
+		            $html .= '</div>';
+		        $html .= '</nav>';
+		    $html .= '</div>';
+		endif;
+	endif;
+	return $html;
+}
+add_shortcode( 'projects', 'projects_func' );
 function site_identity_func( $atts = array(), $content = null ) {
 	global $forclient_options;
 	$logo_url = ($forclient_options['logo']['url']) ? $forclient_options['logo']['url'] : get_template_directory_uri(). '/images/logo.png';
@@ -289,6 +371,42 @@ function social_menu_fnc( $atts = array(), $content = '' ) {
 	return $html;
 }
 add_shortcode( 'social_menu', 'social_menu_fnc' );
+
+function feature_image_func( $atts = array(), $content = '' ) {
+	global $mosacademy_options;
+	$html = '';
+	$img = '';
+	$atts = shortcode_atts( array(
+		'wrapper_element' => 'div',
+		'wrapper_atts' => '',
+		'height' => '',
+		'width' => '',
+	), $atts, 'feature-image' );
+
+	if (has_post_thumbnail()) $img = get_the_post_thumbnail_url();	
+	elseif(@$mosacademy_options['blog-archive-default']['id']) $img = wp_get_attachment_url( $mosacademy_options['blog-archive-default']['id'] ); 
+	if ($img){
+		if ($atts['wrapper_element']) $html .= '<'. $atts['wrapper_element'];
+		if ($atts['wrapper_atts']) $html .= ' ' . $atts['wrapper_atts'];
+		if ($atts['wrapper_element']) $html .= '>';
+		list($width, $height) = getimagesize($img);
+		if ($atts['width'] AND $atts['height']) :
+			if ($width > $atts['width'] AND $height > $atts['height']) $img_url = aq_resize($img, $atts['width'], $atts['height'], true);
+			else $img_url = $img;
+		elseif ($atts['width']) :
+			if ($width > $atts['width']) $img_url = aq_resize($img, $atts['width']);
+			else $img_url = $img;
+		else : 
+			$img_url = $img;
+		endif;
+		list($fwidth, $fheight) = getimagesize($img_url);
+		$html .= '<img class="img-responsive img-fluid img-featured" src="'.$img_url.'" alt="'.get_the_title().'" width="'.$fwidth.'" height="'.$fheight.'" />';
+		if ($atts['wrapper_element']) $html .= '</'. $atts['wrapper_element'] . '>';
+	}
+	return $html;
+}
+add_shortcode( 'feature-image', 'feature_image_func' );
+
 function theme_credit_func( $atts = array(), $content = '' ) {
 	$html = "";
 	$atts = shortcode_atts( array(
